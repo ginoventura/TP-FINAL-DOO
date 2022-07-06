@@ -34,7 +34,11 @@ public class Main {
 
                 //configuramos la vista para que pueda enviar las acciones del usuario como eventos al controlador
                 vista.setControlador(control);
-
+                //probando el githu
+                
+                //hola 
+                
+                
                 //y arrancamos la interfaz:
                 vista.iniciaVista();
             }
