@@ -24,7 +24,6 @@ public class Main {
                 }
                 //modelo:
                 Modelo modelo = new Cliente();
-                //probando
                 
                 //vista:            
                 InterfazVista vista = PaginaPrincipal.getInstancia();
@@ -34,11 +33,7 @@ public class Main {
 
                 //configuramos la vista para que pueda enviar las acciones del usuario como eventos al controlador
                 vista.setControlador(control);
-                //probando el githu
-                
-                //hola 
-                
-                
+
                 //y arrancamos la interfaz:
                 vista.iniciaVista();
             }

@@ -22,6 +22,7 @@ private static final long serialVersionUID = 1L;
         btnVolver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnEditarEmpleado = new javax.swing.JButton();
+        lblTotalFilasTabla = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -100,6 +101,12 @@ private static final long serialVersionUID = 1L;
             }
         });
 
+        lblTotalFilasTabla.setBackground(new java.awt.Color(255, 255, 255));
+        lblTotalFilasTabla.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTotalFilasTabla.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalFilasTabla.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTotalFilasTabla.setText("Total de Filas: 5");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -117,7 +124,8 @@ private static final long serialVersionUID = 1L;
                             .addComponent(btnNuevoEmpleado)
                             .addGap(18, 18, 18)
                             .addComponent(btnEditarEmpleado))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTotalFilasTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -133,7 +141,9 @@ private static final long serialVersionUID = 1L;
                     .addComponent(btnEditarEmpleado))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTotalFilasTabla)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolver)
                 .addGap(30, 30, 30))
         );
@@ -173,6 +183,7 @@ private static final long serialVersionUID = 1L;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel lblTotalFilasTabla;
     public javax.swing.JTable tblEmpleados;
     // End of variables declaration//GEN-END:variables
 }

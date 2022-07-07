@@ -1,7 +1,6 @@
 package ubp.doo.vista;
 
 import java.awt.event.KeyEvent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import ubp.doo.controlador.Controlador;
 import ubp.doo.controlador.PrincipalControlador;
@@ -381,11 +380,12 @@ public class PaginaPrincipal extends javax.swing.JFrame implements InterfazVista
     }//GEN-LAST:event_btnGestionarClientesActionPerformed
 
     private void btnGestionarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarPedidosActionPerformed
-
+        controlador.gestionarPedidos(controlador);
     }//GEN-LAST:event_btnGestionarPedidosActionPerformed
 
     private void btnGestionarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarProductosActionPerformed
-
+        GestionarProductos gp = new GestionarProductos();
+        gp.setVisible(true);
     }//GEN-LAST:event_btnGestionarProductosActionPerformed
 
     private void btnGestionarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarEmpleadosActionPerformed
@@ -456,5 +456,4 @@ public class PaginaPrincipal extends javax.swing.JFrame implements InterfazVista
     public javax.swing.JPanel jPanel7;
     public javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
-
 }

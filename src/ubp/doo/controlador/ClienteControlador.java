@@ -37,23 +37,21 @@ public class ClienteControlador extends Controlador {
         modeloTabla.fireTableDataChanged();
         List<ClienteDto> listadoClientes = ((Cliente) this.MODELO).listar();
         for (ClienteDto cli : listadoClientes) {
-            modeloTabla.addRow(new Object[]{cli.getRazonSocial(), cli.getTipoDocumento(), cli.getNroDocumento(), cli.getApellido(), cli.getNombre(), cli.getTelefono(), cli.getBarrio(), cli.getCalle(), cli.getDepto(), cli.getPiso()});
+            modeloTabla.addRow(new Object[]{cli.getRazonSocial(), cli.getTipoDocumento(), cli.getNroDocumento(), cli.getApellido(), cli.getNombre(), cli.getTelefono(), cli.getBarrio(), cli.getZona(), cli.getCalle(), cli.getDepto(), cli.getPiso()});
         }
     }
     
-    public boolean guardar(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String zona, String barrio, String calle, String depto, int piso) {
-        return ((Cliente) this.MODELO).guardar(razonSocial.toUpperCase(), tipoDocumento.toUpperCase(), nroDocumento.toUpperCase(), apellido.toUpperCase(), nombre.toUpperCase(), telefono, zona.toUpperCase(), barrio.toUpperCase(), calle.toUpperCase(), depto.toUpperCase(), piso);
+    public boolean guardar(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String barrio, String zona, String calle, String depto, int piso) {
+        return ((Cliente) this.MODELO).guardar(razonSocial.toUpperCase(), tipoDocumento.toUpperCase(), nroDocumento.toUpperCase(), apellido.toUpperCase(), nombre.toUpperCase(), telefono, barrio.toUpperCase(), zona.toUpperCase(), calle.toUpperCase(), depto.toUpperCase(), piso);
     }
 
-    public boolean modificar(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String zona, String barrio, String calle, String depto, int piso) {
-        return ((Cliente) this.MODELO).modificar(razonSocial.toUpperCase(), tipoDocumento.toUpperCase(), nroDocumento.toUpperCase(), apellido.toUpperCase(), nombre.toUpperCase(), telefono, zona.toUpperCase(), barrio.toUpperCase(), calle.toUpperCase(), depto.toUpperCase(), piso);
+    public boolean modificar(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String barrio, String zona, String calle, String depto, int piso) {
+        return ((Cliente) this.MODELO).modificar(razonSocial.toUpperCase(), tipoDocumento.toUpperCase(), nroDocumento.toUpperCase(), apellido.toUpperCase(), nombre.toUpperCase(), telefono, barrio.toUpperCase(), zona.toUpperCase(), calle.toUpperCase(), depto.toUpperCase(), piso);
     }
 
     public boolean borrar(String nroDocumento) {
         return ((Cliente) this.MODELO).borrar(nroDocumento);
     }
-
-
 }
 
 

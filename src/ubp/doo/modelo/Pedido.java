@@ -1,10 +1,33 @@
-
 package ubp.doo.modelo;
 
-public class Pedido {
+import java.util.List;
+import ubp.doo.dao.FabricaDao;
+import ubp.doo.dao.PedidoDao;
+import ubp.doo.dto.PedidoDto;
 
+public class Pedido extends Modelo {
+    
+    private final PedidoDao pedidoDao;
+    
     public Pedido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        pedidoDao = (PedidoDao) FabricaDao.getDao("PedidoDaoImp");
     }
     
+    public List<PedidoDto> listar() {
+        List<PedidoDto> listadoPedidos = (List<PedidoDto>) pedidoDao.listarPedidos();
+        return listadoPedidos;
+    }
+    
+    public boolean guardar(int nroPedido, String nroDocumento, String producto, int cantidad, double precio, String medioPago, String fechaEntrega, String horaEntrega) {
+        return pedidoDao.nuevoPedido(new PedidoDto(nroPedido, nroDocumento, producto, cantidad, precio, medioPago, fechaEntrega, horaEntrega));
+    }
+    
+    public boolean borrar(int nroPedido) {
+        return pedidoDao.cancelarPedido(nroPedido);
+    }
+    
+    @Override
+    protected void finalize() throws Throwable {
+        pedidoDao.cerrarConexion();
+    }
 }

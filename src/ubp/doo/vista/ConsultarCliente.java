@@ -83,7 +83,7 @@ public final class ConsultarCliente extends javax.swing.JFrame implements Interf
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Razón Social", "Documento", "Tipo Documento", "Apellido", "Nombre", "Telefono", "Barrio", "Domicilio"
+                "Razón Social", "Documento", "Tipo Documento", "Apellido", "Nombre", "Telefono", "Barrio", "Calle"
             }
         ) {
             Class[] types = new Class [] {
@@ -180,7 +180,7 @@ public final class ConsultarCliente extends javax.swing.JFrame implements Interf
         lblTotalFilasTabla.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTotalFilasTabla.setForeground(new java.awt.Color(255, 255, 255));
         lblTotalFilasTabla.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTotalFilasTabla.setText("Total de Filas: 5");
+        lblTotalFilasTabla.setText("Total de Filas: ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

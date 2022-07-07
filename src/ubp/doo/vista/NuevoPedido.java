@@ -1,11 +1,23 @@
 package ubp.doo.vista;
 
-public class NuevoPedido extends javax.swing.JFrame {
-    
-    public NuevoPedido() {
-        initComponents();
-    }
+import ubp.doo.controlador.Controlador;
+import ubp.doo.controlador.PedidoControlador;
 
+public class NuevoPedido extends javax.swing.JFrame implements InterfazVistaEdit {
+    
+    private PedidoControlador controlador;
+    private boolean edicion;
+    
+    public NuevoPedido(boolean edicion) {
+        initComponents();
+        this.edicion = edicion;
+    }
+    
+    public void iniciaVista() {
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -54,7 +66,7 @@ public class NuevoPedido extends javax.swing.JFrame {
         btnConfirmarPedido.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnConfirmarPedido.setForeground(new java.awt.Color(255, 255, 255));
         btnConfirmarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ubp/doo/imgs/confirmar.png"))); // NOI18N
-        btnConfirmarPedido.setText("Confirmar");
+        btnConfirmarPedido.setText("Generar Pedido");
         btnConfirmarPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +92,11 @@ public class NuevoPedido extends javax.swing.JFrame {
         rdbtnGarrafa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rdbtnGarrafa.setForeground(new java.awt.Color(255, 255, 255));
         rdbtnGarrafa.setText("Garrafa");
+        rdbtnGarrafa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbtnGarrafaActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -134,6 +151,8 @@ public class NuevoPedido extends javax.swing.JFrame {
         btnAnadirAlPedido.setText("Añadir al pedido");
         btnAnadirAlPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        spinCantGarrafa.setEnabled(false);
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ubp/doo/imgs/botella-con-gas.png"))); // NOI18N
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ubp/doo/imgs/tuberia-de-gas.png"))); // NOI18N
@@ -142,10 +161,18 @@ public class NuevoPedido extends javax.swing.JFrame {
         boxTamañoGarrafa.setForeground(new java.awt.Color(255, 255, 255));
         boxTamañoGarrafa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "10", "15", "30", "45" }));
         boxTamañoGarrafa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boxTamañoGarrafa.setEnabled(false);
 
         rdbtnGranel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rdbtnGranel.setForeground(new java.awt.Color(255, 255, 255));
         rdbtnGranel.setText("Granel");
+        rdbtnGranel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbtnGranelActionPerformed(evt);
+            }
+        });
+
+        spinCantGranel.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -193,11 +220,7 @@ public class NuevoPedido extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(116, 116, 116)
                 .addComponent(btnGenerarFecYHora)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelarPedido)
-                .addGap(88, 88, 88)
-                .addComponent(btnConfirmarPedido)
-                .addGap(66, 66, 66))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -251,14 +274,19 @@ public class NuevoPedido extends javax.swing.JFrame {
                             .addComponent(txtFechaEntrega)
                             .addComponent(txtHoraEntrega))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
-                        .addGap(193, 193, 193))))
+                        .addGap(193, 193, 193))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnCancelarPedido)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnConfirmarPedido))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,28 +332,24 @@ public class NuevoPedido extends javax.swing.JFrame {
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHoraEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtHoraEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(btnConfirmarPedido))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(btnGenerarFecYHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(btnCancelarPedido)
-                        .addGap(36, 36, 36))))
+                            .addComponent(btnConfirmarPedido)
+                            .addComponent(btnCancelarPedido)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGenerarFecYHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -344,7 +368,7 @@ public class NuevoPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPedidoActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_btnCancelarPedidoActionPerformed
 
     private void btnConfirmarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPedidoActionPerformed
@@ -354,6 +378,25 @@ public class NuevoPedido extends javax.swing.JFrame {
     private void cmbClientePedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClientePedidoActionPerformed
 
     }//GEN-LAST:event_cmbClientePedidoActionPerformed
+
+    private void rdbtnGarrafaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtnGarrafaActionPerformed
+        if (rdbtnGarrafa.isSelected()) {
+            boxTamañoGarrafa.setEnabled(true);
+            spinCantGarrafa.setEnabled(true);
+        } else {
+            boxTamañoGarrafa.setEnabled(false);
+            spinCantGarrafa.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_rdbtnGarrafaActionPerformed
+
+    private void rdbtnGranelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtnGranelActionPerformed
+        if (rdbtnGranel.isSelected()) {
+            spinCantGranel.setEnabled(true);
+        } else {
+            spinCantGranel.setEnabled(false);
+        }        
+    }//GEN-LAST:event_rdbtnGranelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> boxTamañoGarrafa;
@@ -385,4 +428,25 @@ public class NuevoPedido extends javax.swing.JFrame {
     public javax.swing.JTextField txtHoraEntrega;
     public javax.swing.JTextField txtNroPedido;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizarCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setControlador(Controlador c) {
+        this.controlador = (PedidoControlador) c;
+        actualizarCampos();
+    }
+
+    @Override
+    public void imprimeMensaje(Exception... e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void limpiaVista() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

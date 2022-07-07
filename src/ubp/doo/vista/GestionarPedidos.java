@@ -1,18 +1,22 @@
 package ubp.doo.vista;
 
-import java.awt.Frame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ubp.doo.controlador.Controlador;
+import ubp.doo.controlador.PedidoControlador;
+import ubp.doo.controlador.PrincipalControlador;
 
 public class GestionarPedidos extends javax.swing.JFrame implements InterfazVistaTable {
 
     private static final long serialVersinUID = 1L;
-    private final DefaultTableModel modeloTbl;
+    
+    private final DefaultTableModel modeloTblPedidos;
+    private final PrincipalControlador viewControler = new PrincipalControlador(this, null);
+    private PedidoControlador PedidoController;
   
     public GestionarPedidos(java.awt.Frame parent, boolean modal) {
         initComponents();
-        this.modeloTbl = (DefaultTableModel) this.tblPedidos.getModel();
+        this.modeloTblPedidos = (DefaultTableModel) this.tblPedidos.getModel();
     }
 
     @SuppressWarnings("unchecked")
@@ -47,43 +51,43 @@ public class GestionarPedidos extends javax.swing.JFrame implements InterfazVist
         tblPedidos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "N° Pedido", "Apellido", "Nombre", "Telefono", "Domicilio", "Monto del pedido"
+                "N° Pedido", "Apellido", "Nombre", "Domicilio", "Barrio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -164,28 +168,27 @@ public class GestionarPedidos extends javax.swing.JFrame implements InterfazVist
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtBuscarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPedPendientes)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnNuevoPedido)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCancelarPedido))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnVolver)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblTotalFilasTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTotalFilasTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(txtBuscarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnBuscarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPedPendientes)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnNuevoPedido)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnCancelarPedido))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnVolver)))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -203,13 +206,13 @@ public class GestionarPedidos extends javax.swing.JFrame implements InterfazVist
                         .addComponent(btnPedPendientes))
                     .addComponent(btnBuscarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(txtBuscarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVolver)
-                    .addComponent(lblTotalFilasTabla))
-                .addGap(42, 42, 42))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTotalFilasTabla)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVolver)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -228,15 +231,25 @@ public class GestionarPedidos extends javax.swing.JFrame implements InterfazVist
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPedidoActionPerformed
-
+        viewControler.nuevoPedido(PedidoController);
     }//GEN-LAST:event_btnNuevoPedidoActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPedidoActionPerformed
-
+        if (tblPedidos.getSelectedRow() >= 0) {
+            int ventanaYesNot = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar el pedido?", "Cancelar pedido", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (ventanaYesNot == 0) {
+                int nroPedido = 0;
+                nroPedido = (Integer)tblPedidos.getValueAt(tblPedidos.getSelectedRow(), 1);
+                PedidoController.borrar(nroPedido);
+                PedidoController.cargarTodos(modeloTblPedidos);
+            }  
+        } else {
+            JOptionPane.showMessageDialog(null, "Para poder cancelar un pedido, primero debe seleccionar uno de la tabla.", "Información", 1);
+        }
     }//GEN-LAST:event_btnCancelarPedidoActionPerformed
 
     private void btnBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPedidoActionPerformed
@@ -245,41 +258,62 @@ public class GestionarPedidos extends javax.swing.JFrame implements InterfazVist
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarPedido;
-    private javax.swing.JButton btnCancelarPedido;
-    private javax.swing.JButton btnNuevoPedido;
-    private javax.swing.JButton btnPedPendientes;
+    public javax.swing.JButton btnCancelarPedido;
+    public javax.swing.JButton btnNuevoPedido;
+    public javax.swing.JButton btnPedPendientes;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblTotalFilasTabla;
-    private javax.swing.JTable tblPedidos;
+    public javax.swing.JLabel lblTotalFilasTabla;
+    public javax.swing.JTable tblPedidos;
     private javax.swing.JTextField txtBuscarPedido;
     // End of variables declaration//GEN-END:variables
-
+    
+    public DefaultTableModel getModeloTblPedidos() {
+        return modeloTblPedidos;
+    }
+     
     @Override
     public void actualizaTabla() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PedidoController.cargarTodos(modeloTblPedidos);
+        this.lblTotalFilasTabla.setText("Total pedidos: " + this.modeloTblPedidos.getRowCount());
     }
 
     @Override
     public void setControlador(Controlador c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.PedidoController = (PedidoControlador) c;
+        this.PedidoController.cargarTodos(modeloTblPedidos);
+        this.lblTotalFilasTabla.setText("Total pedidos: " + this.modeloTblPedidos.getRowCount());
+    
     }
 
     @Override
     public void iniciaVista() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     @Override
     public void imprimeMensaje(Exception... e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (e.length > 0) {
+            JOptionPane.showMessageDialog(this, "Error: " + e[0].getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Operación ejecutada con exito", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     @Override
     public void limpiaVista() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public javax.swing.JTable getTblPedidos() {
+        return tblPedidos;
+    }
+    
+    public void setTblPedidos(javax.swing.JTable tblPedidos) {
+        this.tblPedidos = tblPedidos;
     }
 }

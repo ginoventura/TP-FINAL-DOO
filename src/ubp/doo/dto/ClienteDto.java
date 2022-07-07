@@ -8,8 +8,8 @@ public class ClienteDto {
     private String apellido;
     private String nombre;
     private long telefono;
-    private String zona;
     private String barrio;
+    private String zona;
     private String calle;
     private String depto;
     private int piso; 
@@ -17,8 +17,22 @@ public class ClienteDto {
     public ClienteDto() {
     
     }
+
+    public ClienteDto(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String barrio, String zona, String calle, String depto, int piso) {
+        this.razonSocial = razonSocial;
+        this.tipoDocumento = tipoDocumento;
+        this.nroDocumento = nroDocumento;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.barrio = barrio;
+        this.zona = zona;
+        this.calle = calle;
+        this.depto = depto;
+        this.piso = piso;
+    }
     
-    public ClienteDto(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String barrio, String calle, String depto, int piso) {
+    public ClienteDto(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String barrio, String calle) {
         this.razonSocial = razonSocial;
         this.tipoDocumento = tipoDocumento;
         this.nroDocumento = nroDocumento;
@@ -27,28 +41,15 @@ public class ClienteDto {
         this.telefono = telefono;
         this.barrio = barrio;
         this.calle = calle;
-        this.depto = depto;
-        this.piso = piso;
     }
 
-    public ClienteDto(String razonSocial, String nroDocumento, String tipoDocumento, String apellido, String nombre, long telefono, String barrio) {
+    public ClienteDto(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String barrio, String calle, String depto, int piso) {
         this.razonSocial = razonSocial;
         this.tipoDocumento = tipoDocumento;
         this.nroDocumento = nroDocumento;
         this.apellido = apellido;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.barrio = barrio;
-    }
-
-    public ClienteDto(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String zona, String barrio, String calle, String depto, int piso) {
-        this.razonSocial = razonSocial;
-        this.tipoDocumento = tipoDocumento;
-        this.nroDocumento = nroDocumento;
-        this.apellido = apellido;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.zona = zona;
         this.barrio = barrio;
         this.calle = calle;
         this.depto = depto;
@@ -149,6 +150,6 @@ public class ClienteDto {
         return  "[" + razonSocial.toUpperCase() + ", " + tipoDocumento.toUpperCase() + ", " + 
                 nroDocumento.toUpperCase() + ", " + apellido.toUpperCase() + ", " +
                 nombre.toUpperCase() + ", " + telefono + ", " + barrio.toUpperCase() + ", " +
-                calle.toUpperCase() + ", " + depto.toUpperCase() + ", " + piso + "]";
+                zona.toUpperCase() + "," + calle.toUpperCase() + ", " + depto.toUpperCase() + ", " + piso + "]";
     }
 }

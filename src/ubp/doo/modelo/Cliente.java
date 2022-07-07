@@ -23,12 +23,12 @@ public class Cliente extends Modelo {
         return listadoClientes;
     }
     
-    public boolean guardar(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String zona, String barrio, String calle, String depto, int piso) {
-        return clienteDao.insertarCliente (new ClienteDto(razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, zona, barrio, calle, depto, piso));
+    public boolean guardar(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String barrio, String zona, String calle, String depto, int piso) {
+        return clienteDao.insertarCliente (new ClienteDto(razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, zona, calle, depto, piso));
     }
 
-    public boolean modificar(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String zona, String barrio, String calle, String depto, int piso) {
-        return clienteDao.modificarCliente(new ClienteDto(razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, zona, barrio, calle, depto, piso));
+    public boolean modificar(String razonSocial, String tipoDocumento, String nroDocumento, String apellido, String nombre, long telefono, String barrio, String zona, String calle, String depto, int piso) {
+        return clienteDao.modificarCliente(new ClienteDto(razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, zona, calle, depto, piso));
     }
 
     public boolean borrar(String nroDocumento) {

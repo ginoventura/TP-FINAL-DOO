@@ -22,9 +22,7 @@ public class ClienteDaoImp implements ClienteDao {
         ClienteDto clienteResult = null;
 
         try {                        
-            String sql = "SELECT razonSocial, tipoDocumento, nroDocumento, apellido, nombre, "
-                    + "telefono, barrio, calle, depto, piso "
-                    + "FROM clientes WHERE nombre = ? or apellido = ?";
+            String sql = "SELECT razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, zona, calle, depto, piso FROM clientes WHERE nombre = ? or apellido = ?";
             sentencia = con.prepareStatement(sql); 
             sentencia.setString(1, cliente.getNombre());
             sentencia.setString(2, cliente.getApellido());
@@ -38,6 +36,7 @@ public class ClienteDaoImp implements ClienteDao {
             String nombre;
             long telefono;
             String barrio;
+            String zona;
             String calle;
             String depto;
             int piso; 
@@ -50,11 +49,12 @@ public class ClienteDaoImp implements ClienteDao {
                 nombre = rs.getString("nombre");
                 telefono = rs.getLong("telefono");
                 barrio = rs.getString("barrio");
+                zona = rs.getString("zona");
                 calle = rs.getString("calle");
                 depto = rs.getString("depto");
                 piso = rs.getInt("piso");
 
-                cliente = new ClienteDto(razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, calle, depto, piso);
+                cliente = new ClienteDto(razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, zona, calle, depto, piso);
             }
 
         } catch (SQLException e) {
@@ -79,9 +79,7 @@ public class ClienteDaoImp implements ClienteDao {
 
         try {
             con = ConexionSql.getInstancia().getConnection();
-            String sql = "SELECT razonSocial, tipoDocumento, nroDocumento, apellido, nombre, "
-                       + "telefono, barrio "
-                       + "FROM clientes ORDER BY nroDocumento";
+            String sql = "SELECT razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, calle FROM clientes ORDER BY apellido";
             sentencia = con.createStatement();
 
             rs = sentencia.executeQuery(sql);
@@ -93,17 +91,19 @@ public class ClienteDaoImp implements ClienteDao {
             String nombre;
             long telefono;
             String barrio;
+            String calle;
             ClienteDto cliente;
 
             while (rs.next()) {
-                razonSocial = rs.getString("razonSocial");
-                tipoDocumento = rs.getString("tipoDocumento");
-                nroDocumento = rs.getString("nroDocumento");
-                apellido = rs.getString("apellido");
-                nombre = rs.getString("nombre");
-                telefono = rs.getLong("telefono");
-                barrio = rs.getString("barrio");
-                cliente = new ClienteDto(razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio);
+                razonSocial     = rs.getString("razonSocial");
+                tipoDocumento   = rs.getString("tipoDocumento");
+                nroDocumento    = rs.getString("nroDocumento");
+                apellido        = rs.getString("apellido");
+                nombre          = rs.getString("nombre");
+                telefono        = rs.getLong("telefono");
+                barrio          = rs.getString("barrio");
+                calle           = rs.getString("calle");
+                cliente         = new ClienteDto(razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, calle);
                 listaClientes.add(cliente);
             }
 
@@ -127,9 +127,7 @@ public class ClienteDaoImp implements ClienteDao {
 
         try {
             con = ConexionSql.getInstancia().getConnection();
-            String sql = "INSERT INTO clientes (razonSocial, tipoDocumento, nroDocumento, apellido, "
-                       + "nombre, telefono, barrio, calle, depto, piso) "
-                       + "VALUES(?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO clientes (razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, zona, calle, depto, piso) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, cliente.getRazonSocial());
             sentencia.setString(2, cliente.getTipoDocumento());
@@ -138,9 +136,10 @@ public class ClienteDaoImp implements ClienteDao {
             sentencia.setString(5, cliente.getNombre());
             sentencia.setLong  (6, cliente.getTelefono());
             sentencia.setString(7, cliente.getBarrio());
-            sentencia.setString(8, cliente.getCalle());
-            sentencia.setString(9, cliente.getDepto());
-            sentencia.setInt   (10, cliente.getPiso());
+            sentencia.setString(8, cliente.getZona());
+            sentencia.setString(9, cliente.getCalle());
+            sentencia.setString(10, cliente.getDepto());
+            sentencia.setInt   (11, cliente.getPiso());
 
             int resultado = sentencia.executeUpdate();
 
@@ -164,18 +163,20 @@ public class ClienteDaoImp implements ClienteDao {
         
         try {
             con = ConexionSql.getInstancia().getConnection();
-            String sql = "UPDATE clientes SET razonSocial=?, tipoDocumento=?, apellido=?, nombre=?, telefono=?, barrio=?, calle=?, depto=?, piso=? WHERE nroDocumento=?";
+            String sql = "UPDATE clientes SET razonSocial=?, tipoDocumento=?, apellido=?, nombre=?, telefono=?, barrio=?, zona=?, calle=?, depto=?, piso=? WHERE nroDocumento=?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, cliente.getRazonSocial());
             sentencia.setString(2, cliente.getTipoDocumento());
-            sentencia.setString(3, cliente.getApellido());
-            sentencia.setString(4, cliente.getNombre());
-            sentencia.setLong  (5, cliente.getTelefono());
-            sentencia.setString(6, cliente.getBarrio());
-            sentencia.setString(7, cliente.getCalle());
-            sentencia.setString(8, cliente.getDepto());
-            sentencia.setInt   (9, cliente.getPiso());
-            sentencia.setString(10, cliente.getNroDocumento());
+            sentencia.setString(3, cliente.getNroDocumento());
+            sentencia.setString(4, cliente.getApellido());
+            sentencia.setString(5, cliente.getNombre());
+            sentencia.setLong  (6, cliente.getTelefono());
+            sentencia.setString(7, cliente.getBarrio());
+            sentencia.setString(8,cliente.getZona());
+            sentencia.setString(9, cliente.getCalle());
+            sentencia.setString(10, cliente.getDepto());
+            sentencia.setInt   (11, cliente.getPiso());
+
 
             int resultado = sentencia.executeUpdate();
             
@@ -227,9 +228,7 @@ public class ClienteDaoImp implements ClienteDao {
 
         try {
             con = ConexionSql.getInstancia().getConnection();
-            String sql = "SELECT razonSocial, tipoDocumento, nroDocumento, apellido, nombre, "
-                    + "telefono, barrio, calle, depto, piso "
-                    + "FROM clientes where nroDocumento = ?";
+            String sql = "SELECT razonSocial, tipoDocumento, nroDocumento, apellido, nombre, telefono, barrio, calle, depto, piso FROM clientes WHERE nroDocumento = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, nroDocumento);
 
@@ -241,6 +240,7 @@ public class ClienteDaoImp implements ClienteDao {
             String nombre;
             long telefono;
             String barrio;
+            String zona;
             String calle;
             String depto;
             int piso;
